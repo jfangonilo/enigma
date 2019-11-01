@@ -1,11 +1,11 @@
 class Key
 
-  def random_five_digit_number
-    rand(99999)
+  def initialize
+    @number = rand(99999)
   end
 
   def number_as_string
-    random_five_digit_number.to_s.rjust(5, "0")
+    @number.to_s.rjust(5, "0")
   end
 
   def number_string_as_array
@@ -19,8 +19,6 @@ class Key
   end
 
   def keys_step_two
-    keys = []
-    keys_step_one.each {|key| keys << key.join}
-    keys
+    keys_step_one.map {|key| key.join}
   end
 end
