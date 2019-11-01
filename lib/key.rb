@@ -1,26 +1,41 @@
 class Key
+  attr_reader :number
 
-  def random_five_digit_number
-    rand(99999)
+  def initialize
+    @number = rand(99999)
   end
 
   def number_as_string
-    random_five_digit_number.to_s.rjust(5, "0")
+    @number.to_s.rjust(5, "0")
   end
 
   def number_string_as_array
     number_as_string.chars
   end
 
-  def keys_step_one
+  def group_number_string
     keys = []
     number_string_as_array.each_cons(2) {|number| keys << number}
     keys
   end
 
-  def keys_step_two
-    keys = []
-    keys_step_one.each {|key| keys << key.join}
-    keys
+  def keys_array
+    group_number_string.map {|key| key.join}
+  end
+
+  def a
+    keys_array[0].to_i
+  end
+
+  def b
+    keys_array[1].to_i
+  end
+
+  def c
+    keys_array[2].to_i
+  end
+
+  def d
+    keys_array[3].to_i
   end
 end
