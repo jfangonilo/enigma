@@ -5,4 +5,8 @@ class Offset
     @date = Time.new
   end
 
+  def get_year
+    @date.year.split(//).last(2).join
+  end
+
 end
