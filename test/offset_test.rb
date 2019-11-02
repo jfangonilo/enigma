@@ -14,18 +14,8 @@ class OffsetTest < MiniTest::Test
     assert_instance_of Time, @offset.date
   end
 
-  def test_it_can_get_year
-    @offset.stubs(:get_year_string).returns("19")
-    assert_equal "19", @offset.get_year_string
+  def test_get_date_string
+    assert_instance_of String, @offset.get_date_string
   end
 
-  def test_it_can_get_month
-    @offset.stubs(:get_month_string).returns("11")
-    assert_equal "11", @offset.get_month_string
-  end
-
-  def test_it_can_get_day
-    @offset.stubs(:get_day_string).returns("01")
-    assert_equal "01", @offset.get_day_string
-  end
 end
