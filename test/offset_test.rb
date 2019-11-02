@@ -15,8 +15,7 @@ class OffsetTest < MiniTest::Test
   end
 
   def test_it_can_get_year
-    require "pry"; binding.pry
     @offset.stubs(:get_year).returns("19")
-    assert_equal "19", @offset.get_year
+    assert_equal "19", @offset.get_year_string
   end
 end
