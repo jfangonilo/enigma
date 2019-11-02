@@ -9,8 +9,8 @@ class Offset
     @date.year.to_s.split(//).last(2).join
   end
 
-  def method_name
-
+  def get_month_string
+    @date.month.to_s.rjust(2, "0")
   end
 
 end
