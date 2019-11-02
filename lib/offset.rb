@@ -6,10 +6,34 @@ class Offset
   end
 
   def date_string
-<<<<<<< HEAD
-    date.strftime "%d%m%y"
-=======
-    @date.strftime "%d%m%y"
->>>>>>> ce5e71ffe54a1a33cc1303949f224ab6aaf46204
+    date.strftime("%d%m%y")
+  end
+
+  def date_int
+    date_string.to_i
+  end
+
+  def date_squared
+    date_int ** 2
+  end
+
+  def digits_array
+    date_squared.to_s.chars.last(4)
+  end
+
+  def a
+    digits_array[0].to_i
+  end
+
+  def b
+    digits_array[1].to_i
+  end
+
+  def c
+    digits_array[2].to_i
+  end
+
+  def d
+    digits_array[3].to_i
   end
 end
