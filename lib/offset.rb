@@ -13,4 +13,7 @@ class Offset
     @date.month.to_s.rjust(2, "0")
   end
 
+  def get_day_string
+    @date.day.to_s.rjust(2, "0")
+  end
 end
