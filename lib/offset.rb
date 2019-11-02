@@ -5,15 +5,7 @@ class Offset
     @date = Time.new
   end
 
-  def get_year_string
-    @date.year.to_s.split(//).last(2).join
-  end
-
-  def get_month_string
-    @date.month.to_s.rjust(2, "0")
-  end
-
-  def get_day_string
-    @date.day.to_s.rjust(2, "0")
+  def date_string
+    @date.strftime "%d%m%y"
   end
 end
