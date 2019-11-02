@@ -11,25 +11,21 @@ class KeyTest < MiniTest::Test
   end
 
   def test_it_gets_number
-    assert_instance_of Integer, @key.number
-  end
-
-  def test_it_can_convert_to_string
-    @key.stubs(:number_as_string).returns("01234")
-    assert_equal "01234", @key.number_as_string
+    assert_instance_of String, @key.number
   end
 
   def test_number_string_as_array
+    @key.stubs(:number).returns("01234")
     array = ["0", "1", "2", "3", "4"]
-    @key.stubs(:number_string_as_array).returns(array)
     assert_equal array, @key.number_string_as_array
   end
 
-  def test_keys_hash
-    array = [["0", "1"], ["1", "2"],["2", "3"],["3", "4"]]
-    @key.stubs(:keys_array).returns(array)
+  def test_keys_array
+    @key.stubs(:number).returns("01234")
+    array = ["01", "12", "23", "34"]
     assert_equal array, @key.keys_array
   end
+
 
   def test_letter_keys
     @key.stubs(:a).returns(1)

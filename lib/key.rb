@@ -2,25 +2,17 @@ class Key
   attr_reader :number
 
   def initialize
-    @number = rand(99999)
-  end
-
-  def number_as_string
-    @number.to_s.rjust(5, "0")
+    @number = rand.to_s[2..6]
   end
 
   def number_string_as_array
-    number_as_string.chars
-  end
-
-  def group_number_string
-    keys = []
-    number_string_as_array.each_cons(2) {|number| keys << number}
-    keys
+    number.chars
   end
 
   def keys_array
-    group_number_string.map {|key| key.join}
+    keys = []
+    number_string_as_array.each_cons(2) {|number| keys << number}
+    keys.map {|key| key.join}
   end
 
   def a
