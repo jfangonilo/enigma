@@ -15,7 +15,12 @@ class OffsetTest < MiniTest::Test
   end
 
   def test_it_can_get_year
-    @offset.stubs(:get_year).returns("19")
+    @offset.stubs(:get_year_string).returns("19")
     assert_equal "19", @offset.get_year_string
+  end
+
+  def test_it_can_get_month
+    @offset.stubs(:get_month_string).returns("11")
+    assert_equal "11", @offset.get_month_string
   end
 end
