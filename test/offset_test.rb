@@ -23,4 +23,9 @@ class OffsetTest < MiniTest::Test
     @offset.stubs(:get_month_string).returns("11")
     assert_equal "11", @offset.get_month_string
   end
+
+  def test_it_can_get_day
+    @offset.stubs(:get_day_string).returns("01")
+    assert_equal "01", @offset.get_day_string
+  end
 end
