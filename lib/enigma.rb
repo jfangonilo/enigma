@@ -18,4 +18,7 @@ class Enigma
     (date.to_i ** 2).to_s.chars.last(4).map {|offset| offset.to_i}
   end
 
+  def chop_message
+    message.chars.each_slice(4).to_a
+  end
 end
