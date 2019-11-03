@@ -14,4 +14,8 @@ class Enigma
     key.chars.each_cons(2).map {|number| number.join}.map {|key| key.to_i}
   end
 
+  def shift_for_date
+    (date.to_i ** 2).to_s.chars.last(4).map {|offset| offset.to_i}
+  end
+
 end
