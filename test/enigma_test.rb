@@ -19,4 +19,9 @@ class EnigmaTest < MiniTest::Test
   def test_shift_for_date
     assert_equal [0, 9, 4, 4], @enigma.shift_for_date
   end
+
+  def test_chop_message
+    expected = [["h", "e", "l", "l"], ["o", " ", "w", "o"], ["r", "l", "d"]]
+    assert_equal expected, @enigma.chop_message
+  end
 end
