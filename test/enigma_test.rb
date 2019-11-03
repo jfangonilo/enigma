@@ -17,6 +17,10 @@ class EnigmaTest < MiniTest::Test
     assert_instance_of Array, @enigma.alphabet
   end
 
+  def test_alphabet_string
+    assert_instance_of String, @enigma.alphabet_string
+  end
+
   def test_shift_for_key
     assert_equal [1, 12, 23, 34], @enigma.shift_for_key
   end

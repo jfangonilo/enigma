@@ -14,6 +14,10 @@ class Enigma
     ("a".."z").to_a << " "
   end
 
+  def alphabet_string
+    alphabet.join
+  end
+
   def shift_for_key
     key.chars.each_cons(2).map {|number| number.join}.map {|key| key.to_i}
   end
