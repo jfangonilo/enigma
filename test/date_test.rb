@@ -13,6 +13,5 @@ class EncodeDateTest < MiniTest::Test
 
   def test_it_has_date_as_string
     assert_equal "090788", @day.date
-    assert_instance_of String, @day.date
   end
 end
