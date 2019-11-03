@@ -24,10 +24,19 @@ class Enigma
 
   def shifts
     shifts = [shift_for_key, shift_for_date]
-    shifts.transpose.map {|shift| shift.sum}
+    shifts.transpose.map {|shift| shift.sum % 27}
   end
 
   def chop_message
     message.chars.each_slice(4).to_a
+  end
+
+  def encrypt_message
+    message = chop_message
+    message.each do |chunk|
+      chunk.each do |letter|
+        require "pry"; binding.pry
+      end
+    end
   end
 end
