@@ -1,17 +1,18 @@
 require_relative 'test_helper'
 require './lib/enigma'
-require './lib/shift'
 
 class EnigmaTest < MiniTest::Test
   def setup
     @enigma = Enigma.new
-    Shift.stubs(:a).returns(1)
-    Shift.stubs(:b).returns(21)
-    Shift.stubs(:c).returns(27)
-    Shift.stubs(:d).returns(38)
+    @enigma.stubs(:key).returns("01234")
+    @enigma.stubs(:date).returns("090788")
   end
 
   def test_it_exists
     assert_instance_of Enigma, @enigma
+  end
+
+  def test_shift_for_key
+    assert_equal [1, 12, 23, 34], @enigma.shift_for_key
   end
 end
