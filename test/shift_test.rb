@@ -5,7 +5,7 @@ require './lib/key'
 
 class ShiftTest < MiniTest::Test
   def setup
-    Key.stubs(:random_number).returns("01234")
+    Key.stubs(:number).returns("01234")
     Offset.stubs(:date).returns("090788")
   end
 
