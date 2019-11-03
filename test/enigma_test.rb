@@ -26,7 +26,7 @@ class EnigmaTest < MiniTest::Test
   end
 
   def test_shifts
-    assert_equal [1, 21, 0, 11], @enigma.shifts
+    assert_equal [1, 21, 27, 38], @enigma.shifts
   end
 
   def test_chop_message
