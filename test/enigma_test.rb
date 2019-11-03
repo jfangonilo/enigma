@@ -4,6 +4,7 @@ require './lib/shift'
 
 class EnigmaTest < MiniTest::Test
   def setup
+    @enigma = Enigma.new
     Shift.stubs(:a).returns(1)
     Shift.stubs(:b).returns(21)
     Shift.stubs(:c).returns(27)
@@ -11,6 +12,6 @@ class EnigmaTest < MiniTest::Test
   end
 
   def test_it_exists
-    assert_instance_of Enigma, Enigma.new
+    assert_instance_of Enigma, @enigma
   end
 end

@@ -2,19 +2,26 @@ require_relative 'key'
 require_relative 'offset'
 
 class Shift
-  def self.a
-    Key.shifts[0] + Offset.shifts[0]
+  attr_reader :key, :offset
+
+  def initialize
+    @key = Key.new
+    @offset = Offset.new
   end
 
-  def self.b
-    Key.shifts[1] + Offset.shifts[1]
+  def a
+    @key.shifts[0] + @offset.shifts[0]
   end
 
-  def self.c
-    Key.shifts[2] + Offset.shifts[2]
+  def b
+    @key.shifts[1] + @offset.shifts[1]
   end
 
-  def self.d
-    Key.shifts[3] + Offset.shifts[3]
+  def c
+    @key.shifts[2] + @offset.shifts[2]
+  end
+
+  def d
+    @key.shifts[3] + @offset.shifts[3]
   end
 end
