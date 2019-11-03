@@ -6,6 +6,10 @@ class OffsetTest < MiniTest::Test
     Offset.stubs(:date).returns("090788")
   end
 
+  def test_it_exists
+    assert_instance_of Offset, Offset.new
+  end
+
   def test_date_squared
     assert_equal 8_242_460_944, Offset.date_squared
   end

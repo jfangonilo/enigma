@@ -9,6 +9,10 @@ class ShiftTest < MiniTest::Test
     Offset.stubs(:date).returns("090788")
   end
 
+  def test_it_exists
+    assert_instance_of Shift, Shift.new
+  end
+
   def test_a_shift
     assert_equal 1, Shift.a
   end
