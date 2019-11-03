@@ -4,6 +4,7 @@ require './lib/enigma'
 class EnigmaTest < MiniTest::Test
   def setup
     @enigma = Enigma.new
+    @enigma.stubs(:message).returns("hello world")
     @enigma.stubs(:key).returns("01234")
     @enigma.stubs(:date).returns("090788")
   end
@@ -18,6 +19,10 @@ class EnigmaTest < MiniTest::Test
 
   def test_shift_for_date
     assert_equal [0, 9, 4, 4], @enigma.shift_for_date
+  end
+
+  def test_shifts
+    assert_equal [1, 21, 27, 38], @enigma.shifts
   end
 
   def test_chop_message
