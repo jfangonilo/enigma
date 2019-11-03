@@ -12,7 +12,7 @@ class EnigmaTest < MiniTest::Test
   def test_it_exists
     assert_instance_of Enigma, @enigma
   end
-  
+
   def test_it_has_alphabet
     assert_instance_of Array, @enigma.alphabet
   end
@@ -26,11 +26,16 @@ class EnigmaTest < MiniTest::Test
   end
 
   def test_shifts
-    assert_equal [1, 21, 27, 38], @enigma.shifts
+    assert_equal [1, 21, 0, 11], @enigma.shifts
   end
 
   def test_chop_message
     expected = [["h", "e", "l", "l"], ["o", " ", "w", "o"], ["r", "l", "d"]]
     assert_equal expected, @enigma.chop_message
+  end
+
+  def test_encrypt
+    expected = "izlwpuwzsfd"
+    assert_equal expected, @enigma.encrypt_message
   end
 end
