@@ -10,28 +10,13 @@ class Enigma
     @date = EncodeDate.new
   end
 
-  def alphabet
-    ("a".."z").to_a << " "
+  def encrypt_message
+    chopped_message.reduce([]) do |translation, chunk|
+      translation << encrypt_chunk(chunk)
+    end.join
   end
 
-  def map
-    alphabet.join
-  end
-
-  def shift_for_key
-    key.chars.each_cons(2).map {|number| number.join}.map {|key| key.to_i}
-  end
-
-  def shift_for_date
-    (date.to_i ** 2).to_s.chars.last(4).map {|offset| offset.to_i}
-  end
-
-  def shifts
-    shifts = [shift_for_key, shift_for_date]
-    shifts.transpose.map {|shift| shift.sum}
-  end
-
-  def chop_message
+  def chopped_message
     message.chars.each_slice(4).to_a
   end
 
@@ -42,9 +27,24 @@ class Enigma
     end
   end
 
-  def encrypt_message
-    chop_message.reduce([]) do |translation, chunk|
-      translation << encrypt_chunk(chunk)
-    end.join
+  def alphabet
+    ("a".."z").to_a << " "
+  end
+
+  def map
+    alphabet.join
+  end
+
+  def shifts
+    shifts = [shift_for_key, shift_for_date]
+    shifts.transpose.map {|shift| shift.sum}
+  end
+
+  def shift_for_key
+    key.chars.each_cons(2).map {|number| number.join}.map {|key| key.to_i}
+  end
+
+  def shift_for_date
+    (date.to_i ** 2).to_s.chars.last(4).map {|offset| offset.to_i}
   end
 end
