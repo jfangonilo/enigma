@@ -8,7 +8,10 @@ class Enigma
     @message = ""
     @key = Key.new
     @date = EncodeDate.new
-    @alphabet = ("a".."z").to_a << " "
+  end
+
+  def alphabet
+    ("a".."z").to_a << " "
   end
 
   def shift_for_key
