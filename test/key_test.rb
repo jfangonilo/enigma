@@ -3,24 +3,25 @@ require './lib/key'
 
 class KeyTest < MiniTest::Test
   def setup
-    Key.stubs(:number).returns("01234")
+    @key = Key.new
+    @key.stubs(:number).returns("01234")
   end
 
   def test_it_exists
-    assert_instance_of Key, Key.new
+    assert_instance_of Key, @key
   end
 
   def test_random_number_array
     expected = ["0","1","2","3","4"]
-    assert_equal expected, Key.number_array
+    assert_equal expected, @key.number_array
   end
 
   def test_keys_array
     expected = ["01", "12", "23", "34"]
-    assert_equal expected, Key.keys_array
+    assert_equal expected, @key.keys_array
   end
 
   def test_shift
-    assert_equal [1, 12, 23, 34], Key.shifts
+    assert_equal [1, 12, 23, 34], @key.shifts
   end
 end
