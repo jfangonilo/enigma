@@ -15,4 +15,8 @@ class EnigmaTest < MiniTest::Test
   def test_shift_for_key
     assert_equal [1, 12, 23, 34], @enigma.shift_for_key
   end
+
+  def test_shift_for_date
+    assert_equal [0, 9, 4, 4], @enigma.shift_for_date
+  end
 end
