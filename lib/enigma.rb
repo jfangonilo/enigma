@@ -28,28 +28,16 @@ class Enigma
   end
 
   def chop_message
-    message.chars
-  end
-
-  def chunk_message
-    chop_message.each_slice(4).to_a
+    message.chars.each_slice(4).to_a
   end
 
   def encrypt_message
-    a_shift = shifts[0]
-    b_shift = shifts[1]
-    c_shift = shifts[2]
-    d_shift = shifts[3]
-
-    # message1 = chop_message
-    message2 = chunk_message
-    message2.map do |chunk|
-      translated = []
-      translated << chunk[0].tr(alphabet.join, alphabet.rotate(a_shift).join) unless chunk[0].nil?
-      translated << chunk[1].tr(alphabet.join, alphabet.rotate(b_shift).join) unless chunk[1].nil?
-      translated << chunk[2].tr(alphabet.join, alphabet.rotate(c_shift).join) unless chunk[2].nil?
-      translated << chunk[3].tr(alphabet.join, alphabet.rotate(d_shift).join) unless chunk[3].nil?
-      translated
-    end.flatten.join
+    chop_message.reduce([]) do |translation, chunk|
+      translation << chunk[0].tr(alphabet.join, alphabet.rotate(shifts[0]).join) unless chunk[0].nil?
+      translation << chunk[1].tr(alphabet.join, alphabet.rotate(shifts[1]).join) unless chunk[1].nil?
+      translation << chunk[2].tr(alphabet.join, alphabet.rotate(shifts[2]).join) unless chunk[2].nil?
+      translation << chunk[3].tr(alphabet.join, alphabet.rotate(shifts[3]).join) unless chunk[3].nil?
+      translation
+    end.join
   end
 end
