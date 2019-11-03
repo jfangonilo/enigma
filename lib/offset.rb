@@ -3,8 +3,20 @@ class Offset
     Time.new.strftime("%d%m%y")
   end
 
+  def self.date_squared
+    (date.to_i)**2
+  end
+
+  def self.date_sqrd_str
+    date_squared.to_s
+  end
+
+  def self.date_sqrd_array
+    date_sqrd_str.chars
+  end
+
   def self.offset_array
-    ((date.to_i)**2).to_s.chars.last(4)
+    date_sqrd_array.last(4)
   end
 
   def self.shifts

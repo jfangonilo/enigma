@@ -3,7 +3,12 @@ require './lib/key'
 
 class KeyTest < MiniTest::Test
   def setup
-    Key.stubs(:random_number).returns(["0","1","2","3","4"])
+    Key.stubs(:random_number).returns("01234")
+  end
+
+  def test_random_number_array
+    expected = ["0","1","2","3","4"]
+    assert_equal expected, Key.random_number_array
   end
 
   def test_keys_array
