@@ -17,8 +17,8 @@ class EnigmaTest < MiniTest::Test
     assert_instance_of Array, @enigma.alphabet
   end
 
-  def test_alphabet_string
-    assert_instance_of String, @enigma.alphabet_string
+  def test_map
+    assert_instance_of String, @enigma.map
   end
 
   def test_shift_for_key
@@ -41,5 +41,11 @@ class EnigmaTest < MiniTest::Test
   def test_encrypt
     expected = "izlwpuwzsfd"
     assert_equal expected, @enigma.encrypt_message
+  end
+
+  def test_encrypt_chunk
+    original = ["h", "e", "l", "l"]
+    expected = ["i", "z", "l", "w"]
+    assert_equal expected, @enigma.encrypt_chunk(original)
   end
 end
