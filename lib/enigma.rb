@@ -14,7 +14,7 @@ class Enigma
     ("a".."z").to_a << " "
   end
 
-  def alphabet_string
+  def map
     alphabet.join
   end
 
@@ -35,13 +35,16 @@ class Enigma
     message.chars.each_slice(4).to_a
   end
 
+  def encrypt_chunk(chunk)
+    chunk.to_enum.with_index.map do |letter, index|
+      rotated_map = alphabet.rotate(shifts[index]).join
+      chunk[index].tr(map, rotated_map) unless chunk[index].nil?
+    end
+  end
+
   def encrypt_message
     chop_message.reduce([]) do |translation, chunk|
-      translation << chunk[0].tr(alphabet.join, alphabet.rotate(shifts[0]).join) unless chunk[0].nil?
-      translation << chunk[1].tr(alphabet.join, alphabet.rotate(shifts[1]).join) unless chunk[1].nil?
-      translation << chunk[2].tr(alphabet.join, alphabet.rotate(shifts[2]).join) unless chunk[2].nil?
-      translation << chunk[3].tr(alphabet.join, alphabet.rotate(shifts[3]).join) unless chunk[3].nil?
-      translation
+      translation << encrypt_chunk(chunk)
     end.join
   end
 end
