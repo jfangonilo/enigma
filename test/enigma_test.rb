@@ -84,5 +84,8 @@ class EnigmaTest < MiniTest::Test
     assert_equal Date.string, Enigma.encrypt(message, key)[:date]
   end
 
-  
+  def test_encryption_hash_with_only_message
+    message = "hello world!?"
+    assert Enigma.encrypt(message)[:encryption].length == message.length
+  end
 end
