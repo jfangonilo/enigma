@@ -21,6 +21,6 @@ class ShiftTest < MiniTest::Test
   def test_rotation
     key = "01234"
     date = "090788"
-    assert_equal [1, 21, 27, 38], Shift.final(key, date)
+    assert_equal [1, 21, 27, 38], Shift.rotation(key, date)
   end
 end
