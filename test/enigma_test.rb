@@ -23,8 +23,6 @@ class EnigmaTest < MiniTest::Test
   end
 
   def test_chop_message
-    @enigma.stubs(:key).returns("01234")
-    @enigma.stubs(:date).returns("090788")
     expected = [["h", "e", "l", "l"], ["o", " ", "w", "o"], ["r", "l", "d"]]
     assert_equal expected, @enigma.chopped_message("hello world")
   end
