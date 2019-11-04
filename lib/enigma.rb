@@ -2,7 +2,7 @@ require_relative 'key'
 require_relative 'date'
 
 class Enigma
-  attr_reader :message, :key, :date, :alphabet
+  attr_reader :message, :key, :date
 
   def initialize
     @message = ""
