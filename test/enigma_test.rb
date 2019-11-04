@@ -1,68 +1,66 @@
 require_relative 'test_helper'
 require './lib/enigma'
-require './lib/date'
+require './lib/shift'
 
 class EnigmaTest < MiniTest::Test
+  def setup
+    @enigma = Enigma.new
+  end
+
   def test_it_exists
-    enigma = Enigma.new("hello world", "01234", "090788")
-    assert_instance_of Enigma, enigma
+    assert_instance_of Enigma, @enigma
   end
 
   def test_it_has_alphabet
-    enigma = Enigma.new("hello world", "01234", "090788")
-    assert_instance_of Array, enigma.alphabet
+    expected = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
+      "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "]
+    assert_equal expected, @enigma.alphabet
   end
 
   def test_map
-    enigma = Enigma.new("hello world", "01234", "090788")
-    assert_instance_of String, enigma.map
-  end
-
-  def test_shift_for_key
-    enigma = Enigma.new("hello world", "01234", "090788")
-    assert_equal [1, 12, 23, 34], enigma.shift_for_key
-  end
-
-  def test_shift_for_date
-    enigma = Enigma.new("hello world", "01234", "090788")
-    assert_equal [0, 9, 4, 4], enigma.shift_for_date
-  end
-
-  def test_shifts
-    enigma = Enigma.new("hello world", "01234", "090788")
-    assert_equal [1, 21, 27, 38], enigma.shifts
+    expected = "abcdefghijklmnopqrstuvwxyz "
+    assert_equal expected, @enigma.map
   end
 
   def test_chop_message
-    enigma = Enigma.new("hello world", "01234", "090788")
+    @enigma.stubs(:key).returns("01234")
+    @enigma.stubs(:date).returns("090788")
     expected = [["h", "e", "l", "l"], ["o", " ", "w", "o"], ["r", "l", "d"]]
-    assert_equal expected, enigma.chopped_message
+    assert_equal expected, @enigma.chopped_message("hello world")
   end
 
   def test_encrypt
-    enigma = Enigma.new("hello world", "01234", "090788")
+    @enigma.stubs(:key).returns("01234")
+    @enigma.stubs(:date).returns("090788")
+    shifts = Shift.rotation(@enigma.key, @enigma.date)
     expected = "izlwpuwzsfd"
-    assert_equal expected, enigma.encrypt_message
+    assert_equal expected, @enigma.encrypt_message("hello world", shifts)
   end
 
   def test_encrypt_chunk
-    enigma = Enigma.new("hello world", "01234", "090788")
+    @enigma.stubs(:key).returns("01234")
+    @enigma.stubs(:date).returns("090788")
+    shifts = Shift.rotation(@enigma.key, @enigma.date)
     original = ["h", "e", "l", "l"]
     expected = ["i", "z", "l", "w"]
-    assert_equal expected, enigma.encrypt_chunk(original)
+    assert_equal expected, @enigma.encrypt_chunk(original, shifts)
   end
 
   def test_decrypt
-    encrypted_enigma = Enigma.new("izlwpuwzsfd", "01234", "090788")
+    @enigma.stubs(:key).returns("01234")
+    @enigma.stubs(:date).returns("090788")
+    shifts = Shift.rotation(@enigma.key, @enigma.date)
     expected = "hello world"
-    assert_equal expected, encrypted_enigma.decrypt_message
+    assert_equal expected, @enigma.decrypt_message("izlwpuwzsfd", shifts)
   end
 
   def test_decrypt_chunk
-    encrypted_enigma = Enigma.new("izlwpuwzsfd", "01234", "090788")
+    @enigma.stubs(:key).returns("01234")
+    @enigma.stubs(:date).returns("090788")
+    shifts = Shift.rotation(@enigma.key, @enigma.date)
     original = ["i", "z", "l", "w"]
     expected = ["h", "e", "l", "l"]
-    assert_equal expected, encrypted_enigma.decrypt_chunk(original)
+    assert_equal expected, @enigma.decrypt_chunk(original, shifts)
   end
 
   def test_encryption_hash_with_3_args
@@ -75,18 +73,18 @@ class EnigmaTest < MiniTest::Test
       key: "02715",
       date: "040895"
     }
-    assert_equal expected, Enigma.encrypt(message, key, date)
+    assert_equal expected, @enigma.encrypt(message, key, date)
   end
 
   def test_encryption_hash_without_date
     message = "hello world!?"
     key = "02715"
-    assert_equal Date.string, Enigma.encrypt(message, key)[:date]
+    assert_equal Date.string, @enigma.encrypt(message, key)[:date]
   end
 
   def test_encryption_hash_with_only_message
     message = "hello world!?"
-    assert Enigma.encrypt(message)[:encryption].length == message.length
+    assert @enigma.encrypt(message)[:encryption].length == message.length
   end
 
   def test_decryption_hash_with_3_args
@@ -99,12 +97,12 @@ class EnigmaTest < MiniTest::Test
       key: "02715",
       date: "040895"
     }
-    assert_equal expected, Enigma.decrypt(message, key, date)
+    assert_equal expected, @enigma.decrypt(message, key, date)
   end
 
   def test_decryption_hash_without_date
     message = "keder ohulw!?"
     key = "02715"
-    assert_equal Date.string, Enigma.decrypt(message, key)[:date]
+    assert_equal Date.string, @enigma.decrypt(message, key)[:date]
   end
 end
