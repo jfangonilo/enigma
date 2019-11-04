@@ -4,18 +4,19 @@ require_relative 'date'
 class Enigma
   attr_reader :key, :date
 
-  def initialize
-    @key = Key.new
-    @date = EncodeDate.new
-  end
+  # def initialize
+  #   @key = Key.new
+  #   @date = EncodeDate.new
+  # end
 
   def encrypt(message, key = nil, date = nil)
+    @key = Key.new(key)
+    @date = EncodeDate.new(date)
     encrypt_hash= {}
-    require "pry"; binding.pry
+    encrypt_hash[:key] = key_string
+    encrypt_hash[:date] = date_string
     encrypt_hash[:encryption] = encrypt_message(message)
-    encrypt_hash[:key] = Key.new(key)
-    encrypt_hash[:date] = EncodeDate.new(date)
-    require "pry"; binding.pry
+    encrypt_hash
   end
 
   def encrypt_message(message)
@@ -61,11 +62,19 @@ class Enigma
     shifts.transpose.map(&:sum)
   end
 
+  def key_string
+    @key.number
+  end
+
+  def date_string
+    @date.date
+  end
+
   def shift_for_key
-    key.chars.each_cons(2).map(&:join).map(&:to_i)
+    key_string.chars.each_cons(2).map(&:join).map(&:to_i)
   end
 
   def shift_for_date
-    (date.to_i ** 2).to_s.chars.last(4).map(&:to_i)
+    (date_string.to_i ** 2).to_s.chars.last(4).map(&:to_i)
   end
 end
