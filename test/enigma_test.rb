@@ -88,4 +88,23 @@ class EnigmaTest < MiniTest::Test
     message = "hello world!?"
     assert Enigma.encrypt(message)[:encryption].length == message.length
   end
+
+  def test_decryption_hash_with_3_args
+    message = "keder ohulw!?"
+    key = "02715"
+    date = "040895"
+
+    expected = {
+      decryption: "hello world!?",
+      key: "02715",
+      date: "040895"
+    }
+    assert_equal expected, Enigma.decrypt(message, key, date)
+  end
+
+  def test_decryption_hash_without_date
+    message = "keder ohulw!?"
+    key = "02715"
+    assert_equal Date.string, Enigma.decrypt(message, key)[:date]
+  end
 end
