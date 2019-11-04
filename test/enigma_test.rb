@@ -34,18 +34,32 @@ class EnigmaTest < MiniTest::Test
   end
 
   def test_chop_message
+    message = "hello world"
     expected = [["h", "e", "l", "l"], ["o", " ", "w", "o"], ["r", "l", "d"]]
-    assert_equal expected, @enigma.chopped_message
+    assert_equal expected, @enigma.chopped_message(message)
   end
 
   def test_encrypt
+    message = "hello world"
     expected = "izlwpuwzsfd"
-    assert_equal expected, @enigma.encrypt_message
+    assert_equal expected, @enigma.encrypt_message(message)
   end
 
   def test_encrypt_chunk
     original = ["h", "e", "l", "l"]
     expected = ["i", "z", "l", "w"]
     assert_equal expected, @enigma.encrypt_chunk(original)
+  end
+
+  def test_decrypt
+    message = "izlwpuwzsfd"
+    expected = "hello world"
+    assert_equal expected, @enigma.decrypt_message(message)
+  end
+
+  def test_decrypt_chunk
+    original = ["i", "z", "l", "w"]
+    expected = ["h", "e", "l", "l"]
+    assert_equal expected, @enigma.decrypt_chunk(original)
   end
 end
