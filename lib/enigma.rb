@@ -9,6 +9,15 @@ class Enigma
     @date = EncodeDate.new
   end
 
+  def encrypt(message, key = nil, date = nil)
+    encrypt_hash= {}
+    require "pry"; binding.pry
+    encrypt_hash[:encryption] = encrypt_message(message)
+    encrypt_hash[:key] = Key.new(key)
+    encrypt_hash[:date] = EncodeDate.new(date)
+    require "pry"; binding.pry
+  end
+
   def encrypt_message(message)
     chopped_message(message).reduce([]) do |translation, chunk|
       translation << encrypt_chunk(chunk)
