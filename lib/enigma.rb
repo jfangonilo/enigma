@@ -21,11 +21,11 @@ class Enigma
 
   def decrypt(message, key = @key, date = @date)
     shifts = Shift.final(key, date)
-    encrypt_hash = {}
-    encrypt_hash[:decryption] = decrypt_message(message, shifts)
-    encrypt_hash[:key] = key
-    encrypt_hash[:date] = date
-    encrypt_hash
+    decrypt_hash = {}
+    decrypt_hash[:decryption] = decrypt_message(message, shifts)
+    decrypt_hash[:key] = key
+    decrypt_hash[:date] = date
+    decrypt_hash
   end
 
   def encrypt_message(message, shifts)
