@@ -48,4 +48,10 @@ class EnigmaTest < MiniTest::Test
     expected = ["i", "z", "l", "w"]
     assert_equal expected, @enigma.encrypt_chunk(original)
   end
+
+  def test_decrypt_chunk
+    original = ["i", "z", "l", "w"]
+    expected = ["h", "e", "l", "l"]
+    assert_equal expected, @enigma.decrypt_chunk(original)
+  end
 end
