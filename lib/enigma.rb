@@ -10,10 +10,19 @@ class Enigma
     @date = date
   end
 
-  def encrypt(message, key = Key.number, date = EncodeDate.date)
+  def self.encrypt(message, key = Key.number, date = Date.string)
     enigma = Enigma.new(message, key, date)
     encrypt_hash = {}
     encrypt_hash[:encryption] = enigma.encrypt_message
+    encrypt_hash[:key] = enigma.key
+    encrypt_hash[:date] = enigma.date
+    encrypt_hash
+  end
+
+  def self.decrypt(message, key = Key.number, date = Date.string)
+    enigma = Enigma.new(message, key, date)
+    encrypt_hash = {}
+    encrypt_hash[:decryption] = enigma.decrypt_message
     encrypt_hash[:key] = enigma.key
     encrypt_hash[:date] = enigma.date
     encrypt_hash
