@@ -17,10 +17,10 @@ class KeyTest < MiniTest::Test
     number = "00000"
     assert_equal "00000", @key.valid_key(number)
     number = "1234"
-    assert_instance_of String, @key.valid_key(number)
+    refute_equal "1234", @key.valid_key(number)
     number = "123456"
-    assert_instance_of String, @key.valid_key(number)
+    refute_equal "123456", @key.valid_key(number)
     number = "asfkkjhk"
-    assert_instance_of String, @key.valid_key(number)
+    refute_equal "asfkkjhk", @key.valid_key(number)
   end
 end
