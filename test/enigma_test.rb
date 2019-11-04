@@ -4,7 +4,7 @@ require './lib/enigma'
 class EnigmaTest < MiniTest::Test
   def setup
     @enigma = Enigma.new
-    @enigma.stubs(:message).returns("hello world")
+    # @enigma.stubs(:message).returns("hello world")
     @enigma.stubs(:key).returns("01234")
     @enigma.stubs(:date).returns("090788")
   end
