@@ -4,9 +4,6 @@ require './lib/enigma'
 class EnigmaTest < MiniTest::Test
   def setup
     @enigma = Enigma.new
-    # @enigma.stubs(:message).returns("hello world")
-    # @enigma.stubs(:key_string).returns("01234")
-    # @enigma.stubs(:date_string).returns("090788")
   end
 
   def test_it_exists
@@ -76,10 +73,16 @@ class EnigmaTest < MiniTest::Test
   end
 
   def test_encryption_hash
-    message = "hello world"
-    key = "01234"
-    date = "090788"
+    message = "hello world!?"
+    key = "02715"
+    date = "040895"
+
+    expected = {
+      encryption: "keder ohulw!?",
+      key: "02715",
+      date: "040895"
+    }
     require "pry"; binding.pry
-    @enigma.encrypt(message, key, date)
+    assert_equal expected, @enigma.encrypt(message, key, date)
   end
 end
