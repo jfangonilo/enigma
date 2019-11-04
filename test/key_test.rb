@@ -10,4 +10,17 @@ class KeyTest < MiniTest::Test
   def test_it_exists
     assert_instance_of Key, @key
   end
+
+  def test_generate_key
+    number = "01234"
+    assert_equal "01234", @key.generate_key(number)
+    number = "00000"
+    assert_equal "00000", @key.generate_key(number)
+    number = "1234"
+    assert_instance_of String, @key.generate_key(number)
+    number = "123456"
+    assert_instance_of String, @key.generate_key(number)
+    number = "asfkkjhk"
+    assert_instance_of String, @key.generate_key(number)
+  end
 end
