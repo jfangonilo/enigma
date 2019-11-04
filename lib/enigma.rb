@@ -6,7 +6,7 @@ class Enigma
   def encrypt(message, key = nil, date = nil)
     @key = Key.new(key)
     @encode_date = EncodeDate.new(date)
-    encrypt_hash= {}
+    encrypt_hash = {}
     encrypt_hash[:key] = key_string
     encrypt_hash[:date] = date_string
     encrypt_hash[:encryption] = encrypt_message(message)
