@@ -10,8 +10,8 @@ class Enigma
     @date = EncodeDate.new
   end
 
-  def encrypt_message
-    chopped_message.reduce([]) do |translation, chunk|
+  def encrypt_message(message)
+    chopped_message(message).reduce([]) do |translation, chunk|
       translation << encrypt_chunk(chunk)
     end.join
   end
@@ -23,7 +23,10 @@ class Enigma
     end
   end
 
-  def decrypt_message
+  def decrypt_message(message)
+    chopped_message(message).reduce([]) do |translation, chunk|
+      translation << decrypt_chunk(chunk)
+    end.join
 
   end
 
@@ -34,7 +37,7 @@ class Enigma
     end
   end
 
-  def chopped_message
+  def chopped_message(message)
     message.chars.each_slice(4).to_a
   end
 
