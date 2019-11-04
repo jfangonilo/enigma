@@ -11,7 +11,7 @@ class Enigma
   end
 
   def encrypt(message, key = @key, date = @date)
-    shifts = Shift.rotation(key, date)
+    shifts = Shift.final(key, date)
     encrypt_hash = {}
     encrypt_hash[:encryption] = encrypt_message(message, shifts)
     encrypt_hash[:key] = key
@@ -20,7 +20,7 @@ class Enigma
   end
 
   def decrypt(message, key = @key, date = @date)
-    shifts = Shift.rotation(key, date)
+    shifts = Shift.final(key, date)
     encrypt_hash = {}
     encrypt_hash[:decryption] = decrypt_message(message, shifts)
     encrypt_hash[:key] = key

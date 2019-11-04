@@ -1,5 +1,5 @@
 class Shift
-  def self.rotation(key, date)
+  def self.final(key, date)
     shifts = [key_shift(key), date_shift(date)]
     shifts.transpose.map(&:sum)
   end

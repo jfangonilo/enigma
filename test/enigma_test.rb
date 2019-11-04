@@ -32,7 +32,7 @@ class EnigmaTest < MiniTest::Test
   def test_encrypt
     @enigma.stubs(:key).returns("01234")
     @enigma.stubs(:date).returns("090788")
-    shifts = Shift.rotation(@enigma.key, @enigma.date)
+    shifts = Shift.final(@enigma.key, @enigma.date)
     expected = "izlwpuwzsfd"
     assert_equal expected, @enigma.encrypt_message("hello world", shifts)
   end
@@ -40,7 +40,7 @@ class EnigmaTest < MiniTest::Test
   def test_encrypt_chunk
     @enigma.stubs(:key).returns("01234")
     @enigma.stubs(:date).returns("090788")
-    shifts = Shift.rotation(@enigma.key, @enigma.date)
+    shifts = Shift.final(@enigma.key, @enigma.date)
     original = ["h", "e", "l", "l"]
     expected = ["i", "z", "l", "w"]
     assert_equal expected, @enigma.encrypt_chunk(original, shifts)
@@ -49,7 +49,7 @@ class EnigmaTest < MiniTest::Test
   def test_decrypt
     @enigma.stubs(:key).returns("01234")
     @enigma.stubs(:date).returns("090788")
-    shifts = Shift.rotation(@enigma.key, @enigma.date)
+    shifts = Shift.final(@enigma.key, @enigma.date)
     expected = "hello world"
     assert_equal expected, @enigma.decrypt_message("izlwpuwzsfd", shifts)
   end
@@ -57,7 +57,7 @@ class EnigmaTest < MiniTest::Test
   def test_decrypt_chunk
     @enigma.stubs(:key).returns("01234")
     @enigma.stubs(:date).returns("090788")
-    shifts = Shift.rotation(@enigma.key, @enigma.date)
+    shifts = Shift.final(@enigma.key, @enigma.date)
     original = ["i", "z", "l", "w"]
     expected = ["h", "e", "l", "l"]
     assert_equal expected, @enigma.decrypt_chunk(original, shifts)
