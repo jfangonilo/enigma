@@ -19,6 +19,15 @@ class Enigma
     encrypt_hash
   end
 
+  def self.decrypt(message, key = Key.number, date = Date.string)
+    enigma = Enigma.new(message, key, date)
+    encrypt_hash = {}
+    encrypt_hash[:decryption] = enigma.decrypt_message
+    encrypt_hash[:key] = enigma.key
+    encrypt_hash[:date] = enigma.date
+    encrypt_hash
+  end
+
   def encrypt_message
     chopped_message.reduce([]) do |translation, chunk|
       translation << encrypt_chunk(chunk)
