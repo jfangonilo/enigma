@@ -3,8 +3,6 @@ require_relative 'date'
 require_relative 'shift'
 
 class Enigma
-  attr_reader :key, :date
-
   def initialize
     @key = Key.number
     @date = Date.string
@@ -12,20 +10,12 @@ class Enigma
 
   def encrypt(message, key = @key, date = @date)
     shifts = Shift.final(key, date)
-    encrypt_hash = {}
-    encrypt_hash[:encryption] = encrypt_message(message, shifts)
-    encrypt_hash[:key] = key
-    encrypt_hash[:date] = date
-    encrypt_hash
+    { encryption: encrypt_message(message, shifts), key: key, date: date }
   end
 
   def decrypt(message, key = @key, date = @date)
     shifts = Shift.final(key, date)
-    decrypt_hash = {}
-    decrypt_hash[:decryption] = decrypt_message(message, shifts)
-    decrypt_hash[:key] = key
-    decrypt_hash[:date] = date
-    decrypt_hash
+    { decryption: decrypt_message(message, shifts), key: key, date: date }
   end
 
   def encrypt_message(message, shifts)
