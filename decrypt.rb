@@ -2,12 +2,11 @@ require_relative './lib/enigma'
 require_relative './lib/key'
 require_relative './lib/date'
 
-input_file = ARGV[0]
+input_file =  ARGV[0]
 output_file = ARGV[1]
-key = ARGV[2].to_s
-date = ARGV[3].to_s
+key =         ARGV[2].to_s
+date =        ARGV[3].to_s
 
-enigma = Enigma.new
 message = File.open(input_file)
 
 if key.count("0123456789") != 5
@@ -20,8 +19,9 @@ if date.count("0123456789") != 6
   date = Date.string
 end
 
+enigma = Enigma.new
 cipher = enigma.decrypt(message, key, date)[:decryption]
 
 File.write(output_file, cipher)
 
-puts "Created #{output_file} with the key #{key} and date #{date}"
+puts "Created #{output_file} with the key #{enigma.key} and date #{enigma.date}"

@@ -3,6 +3,8 @@ require_relative 'date'
 require_relative 'shift'
 
 class Enigma
+  attr_reader :key, :date
+
   def initialize
     @key = Key.number
     @date = Date.string
