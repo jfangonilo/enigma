@@ -1,6 +1,6 @@
-require_relative 'enigma'
-require_relative 'key'
-require_relative 'date'
+require_relative './lib/enigma'
+require_relative './lib/key'
+require_relative './lib/date'
 
 input_file = ARGV[0]
 message = File.open(input_file)
