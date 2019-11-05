@@ -3,14 +3,25 @@ require_relative './lib/key'
 require_relative './lib/date'
 
 input_file = ARGV[0]
-message = File.open(input_file)
+output_file = ARGV[1]
+key = ARGV[2].to_s
+date = ARGV[3].to_s
 
 enigma = Enigma.new
-key = Key.number
-date = Date.string
+message = File.open(input_file)
+
+if key.count("0123456789") != 5
+  puts "Invalid key: #{key}. New key generated."
+  key = Key.number
+end
+
+if date.count("0123456789") != 6
+  puts "Invalid date: #{date}. Today's date used."
+  date = Date.string
+end
+
 cipher = enigma.decrypt(message, key, date)[:decryption]
 
-output_file = ARGV[1]
 File.write(output_file, cipher)
 
 puts "Created #{output_file} with the key #{key} and date #{date}"

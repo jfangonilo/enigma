@@ -3,14 +3,16 @@ require_relative './lib/key'
 require_relative './lib/date'
 
 input_file = ARGV[0]
-message = File.open(input_file)
+output_file = ARGV[1]
 
-enigma = Enigma.new
+message = File.open(input_file)
 key = Key.number
 date = Date.string
+
+enigma = Enigma.new
+
 cipher = enigma.encrypt(message, key, date)[:encryption]
 
-output_file = ARGV[1]
 File.write(output_file, cipher)
 
 puts "Created #{output_file} with the key #{key} and date #{date}"
