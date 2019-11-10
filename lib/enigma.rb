@@ -39,7 +39,6 @@ class Enigma
 
   def decrypt_chunk(chunk, shifts)
     chunk.map.with_index do |letter, index|
-      require "pry"; binding.pry
       rotated_map = alphabet.rotate(shifts[index]).join
       chunk[index].tr(rotated_map, map) unless chunk[index].nil?
     end
