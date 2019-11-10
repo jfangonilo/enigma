@@ -4,12 +4,12 @@ require_relative 'shift'
 require_relative 'alphabet'
 
 class Enigma
-  attr_reader :key, :date, :alphabet
+  attr_reader :key, :date, :map
 
   def initialize
     @key = Key.number
     @date = Date.string
-    @alphabet = Alphabet.default
+    @map = Alphabet.default
   end
 
   def encrypt(message, key = @key, date = @date)
@@ -32,23 +32,19 @@ class Enigma
 
   def encrypt_chunk(chunk, shifts)
     chunk.map.with_index do |letter, index|
-      rotated_map = alphabet.rotate(shifts[index]).join
+      rotated_map = map.chars.rotate(shifts[index]).join
       chunk[index].tr(map, rotated_map) unless chunk[index].nil?
     end
   end
 
   def decrypt_chunk(chunk, shifts)
     chunk.map.with_index do |letter, index|
-      rotated_map = alphabet.rotate(shifts[index]).join
+      rotated_map = map.chars.rotate(shifts[index]).join
       chunk[index].tr(rotated_map, map) unless chunk[index].nil?
     end
   end
 
   def chopped(message)
     message.each_char.each_slice(4).to_a
-  end
-
-  def map
-    alphabet.join
   end
 end
