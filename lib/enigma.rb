@@ -45,6 +45,6 @@ class Enigma
   end
 
   def chopped(message)
-    message.each_char.each_slice(4).to_a
+    message.chars.each_slice(4).to_a
   end
 end
