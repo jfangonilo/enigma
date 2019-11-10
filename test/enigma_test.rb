@@ -24,7 +24,7 @@ class EnigmaTest < MiniTest::Test
 
   def test_chop_message
     expected = [["h", "e", "l", "l"], ["o", " ", "w", "o"], ["r", "l", "d"]]
-    assert_equal expected, @enigma.chopped_message("hello world")
+    assert_equal expected, @enigma.chopped("hello world")
   end
 
   def test_encrypt
