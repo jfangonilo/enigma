@@ -2,14 +2,6 @@ require_relative 'test_helper'
 require './lib/shift'
 
 class ShiftTest < MiniTest::Test
-  def setup
-    @shift = Shift.new
-  end
-
-  def test_it_exists
-    assert_instance_of Shift, @shift
-  end
-
   def test_key_shift
     assert_equal [1, 12, 23, 34], Shift.key("01234")
   end
